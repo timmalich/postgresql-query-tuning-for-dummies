@@ -1,0 +1,6 @@
+create or replace function  r_between(min bigint, max bigint) returns bigint as
+$$
+BEGIN
+    RETURN floor(random() * (max-min + 1) + min);
+END;
+$$ language 'plpgsql' STRICT;

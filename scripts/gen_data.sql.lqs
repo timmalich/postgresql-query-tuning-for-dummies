@@ -1,0 +1,83 @@
+do $$
+    declare
+       sales_amount    integer := 2000000;
+       users_amount    integer := 1000000;
+       products_amount integer := 100000;
+       shops_amount    integer := 10000;
+
+    begin
+        raise notice '%: generating % users. BE PATIENT THIS TAKES A WHILE!', now(), users_amount;
+        for i in 1..(users_amount/10) LOOP
+                insert into public.users
+                (version, uid, uid_upper, nickname, givenname, surname, email, mobile, allo_startdate, allo_enddate, state, city, street, postalcode, company, superuser, departmentnumber, description, initialpassword, roomnumber, sourceprocess)
+                values
+                    (0, i||'_0uid', i||'_0UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '360 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_1uid', i||'_1UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '361 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_2uid', i||'_2UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '362 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_3uid', i||'_3UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '363 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_4uid', i||'_4UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '364 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_5uid', i||'_5UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '365 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_6uid', i||'_6UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '366 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_7uid', i||'_7UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '367 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_8uid', i||'_8UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '368 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', true,  i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess'),
+                    (0, i||'_9uid', i||'_9UID', i||'_nick', i||'_givenname', i||'_surname', i||'_email', i||'_mobile', now(), now() + INTERVAL '369 DAYS', i||'_state', i||'_city', i||'_street', i||'_pcode', i||'_comp', false, i||'_depno', i||'_description', i||'_initialpw', i||'_roomnumber', i||'_sourceprocess')
+                ;
+        end loop;
+        commit;
+
+        raise notice '%: generating % products. BE PATIENT THIS TAKES A WHILE!', now(), products_amount ;
+        for i in 1..(products_amount/10) LOOP
+                insert into products
+                (name, description, categories, cost)
+                values
+                    (i||'_0name', i||'_0description', '{"A","B"}', i + 0),
+                    (i||'_1name', i||'_1description', '{"B","C"}', i + 1),
+                    (i||'_2name', i||'_2description', '{"A"}', i + 2),
+                    (i||'_3name', i||'_3description', '{"B"}', i + 3),
+                    (i||'_4name', i||'_4description', '{"C"}', i + 4),
+                    (i||'_5name', i||'_5description', '{"D"}', i + 5),
+                    (i||'_6name', i||'_6description', '{"A","C"}', i + 6),
+                    (i||'_7name', i||'_7description', '{"A","D"}', i + 7),
+                    (i||'_8name', i||'_8description', '{"C","D"}', i + 8),
+                    (i||'_9name', i||'_9description', '{"A","B","C","D"}', i + 9);
+            end loop;
+        commit;
+        raise notice '%: generating % shops. BE PATIENT THIS TAKES A WHILE!', now(), shops_amount;
+        for i in 1..(shops_amount/10) LOOP
+                insert into shops
+                (name, email, mobile, country_code, city, street, postalcode, url)
+                values
+                    (i||'_0name', i||'_0foo@foo.com', i||'+0 123456', 'DE', i||'_0city', i||'_0street', i||'_0postalcode', 'https://foo.com/0_'||i),
+                    (i||'_1name', i||'_1foo@foo.com', i||'+1 123456', 'DE', i||'_1city', i||'_1street', i||'_1postalcode', 'https://foo.com/1_'||i),
+                    (i||'_2name', i||'_2foo@foo.com', i||'+2 123456', 'DE', i||'_2city', i||'_2street', i||'_2postalcode', 'https://foo.com/2_'||i),
+                    (i||'_3name', i||'_3foo@foo.com', i||'+3 123456', 'DE', i||'_3city', i||'_3street', i||'_3postalcode', 'https://foo.com/3_'||i),
+                    (i||'_4name', i||'_4foo@foo.com', i||'+4 123456', 'DE', i||'_4city', i||'_4street', i||'_4postalcode', 'https://foo.com/4_'||i),
+                    (i||'_5name', i||'_5foo@foo.com', i||'+5 123456', 'DE', i||'_5city', i||'_5street', i||'_5postalcode', 'https://foo.com/5_'||i),
+                    (i||'_6name', i||'_6foo@foo.com', i||'+6 123456', 'DE', i||'_6city', i||'_6street', i||'_6postalcode', 'https://foo.com/6_'||i),
+                    (i||'_7name', i||'_7foo@foo.com', i||'+7 123456', 'DE', i||'_7city', i||'_7street', i||'_7postalcode', 'https://foo.com/7_'||i),
+                    (i||'_8name', i||'_8foo@foo.com', i||'+8 123456', 'DE', i||'_8city', i||'_8street', i||'_8postalcode', 'https://foo.com/8_'||i),
+                    (i||'_9name', i||'_9foo@foo.com', i||'+9 123456', 'DE', i||'_9city', i||'_9street', i||'_9postalcode', 'https://foo.com/9_'||i)
+                ;
+            end loop;
+        commit;
+
+        raise notice '%: generating % sales. BE PATIENT THIS TAKES A WHILE!', now(), sales_amount;
+        for i in 1..(sales_amount/10) loop
+                insert into sales
+                (users_id, products_id, shops_id, selling_price, payed, currency, selling_date, last_payment)
+                values
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 10+i, i, 'euro', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 20+i, 10+1, 'dollar', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 30+i, 20+1, 'yen', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 40+i, 30+1, 'rmb', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 50+i, 40+1, 'rupiah', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 60+i, 50+1, 'bath', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 70+i, 60+1, 'rupie', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 80+i, 70+1, 'peso', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 90+i, 80+1, 'zloty', now(), now()),
+                    (r_between(1,users_amount-1), r_between(1, products_amount-1), r_between(1, shops_amount-1), 100+i, 100+1, 'mark', now(), now())
+                    ;
+            end loop;
+
+    end;
+$$;
