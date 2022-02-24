@@ -1,9 +1,11 @@
 # Postgresql Query Tuning for Dummies
 Repository to create a Postgres database with dummy data and query tuning samples
 
+THIS IS ALL WORK IN PROGRESS!
+
 ## Setup database:
-With this statement you'll create a running postgres instance on port 64271.
-It will include 4 tables in schema 'public':
+With the next statements you'll create a running postgres instance on port 64271 in particular version.
+The db will include 4 tables in schema 'public':
 
 | table name | rows      |
 |------------|-----------|
@@ -12,12 +14,20 @@ It will include 4 tables in schema 'public':
 | products   | 100.000   |
 | shops      | 10.000    |
 
+IMPORTANT: depending on your hardware this might run a couple of minutes.
+The database is available after you see this line on stdout:
+`... database system is ready to accept connections`
+Note: the additional env parameter PGPASSWORD=pg only allows to execute `psql -U postgres` in the running container without being prompted for the password.
+
+### Version 14.2.0 (the newest available in feb 2022):
 ```bash
-# IMPORTANT: depending on your hardware this might run a couple of minutes. 
-# The database is available after you see this line on stdout:
-# `... database system is ready to accept connections`
 docker rm -f tuningfordummies; docker run --name tuningfordummies -p 64271:5432 -v $(pwd)/scripts:/docker-entrypoint-initdb.d/ -e POSTGRESQL_PASSWORD=pg -e PGPASSWORD=pg bitnami/postgresql:14.2.0
-# Note: the additional env parameter PGPASSWORD=pg only allows to execute `psql -U postgres` in the running container without being prompted for the password.
+
+```
+
+### Version 11.15.0
+```bash
+docker rm -f tuningfordummies; docker run --name tuningfordummies -p 64271:5432 -v $(pwd)/scripts:/docker-entrypoint-initdb.d/ -e POSTGRESQL_PASSWORD=pg -e PGPASSWORD=pg bitnami/postgresql:11.15.0
 ```
 
 ## Configure amount of test data:
