@@ -58,3 +58,6 @@ If your not sure a fast and slow query are doing the same thing:
  - Simply use count for large result sets
  - You should have business logic tests in your application. If there are none: make the world, step by step, a tiny bit better and write them!
 
+TODO:
+Guids for general PerfOpt
+Avoid unnecessary sub joins

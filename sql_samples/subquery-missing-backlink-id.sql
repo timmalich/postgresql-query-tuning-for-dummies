@@ -1,3 +1,6 @@
+-- WARNING: ONLY USE THIS IN CASE THE `outer clause` should affect the inner result set.
+--    There are real world scenarios which are requiring that the inner select should not be affected by the outer restrictions
+
 -- BAD 8s:
 select *
 from sales outerSales
