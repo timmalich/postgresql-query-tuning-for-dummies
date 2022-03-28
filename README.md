@@ -1,7 +1,13 @@
 # Postgresql Query Tuning for Dummies
 Repository to create a Postgres database with dummy data and query tuning samples
 
-THIS IS ALL WORK IN PROGRESS!
+The point of the query examples is to show generic examples of simple SQL rewriting to optimize performance.
+The sample queries are trying to highlight special changes to improve the performance without modifying the result set.
+Most of the queries can be written even faster or easier, but in real world situations this is not always possible.
+
+Therefore, please only focus on the differences.
+- Do not try to rewrite the query in this repo as fast as possible and do not try to grasp any real business logic behind the samples.
+- Do not try to always just add another index to every problem. Indexes have downsides too (e.g. writing performance, dead tuple creation, hard disk consumption, ...)
 
 ## Setup database:
 With the next statements you'll create a running postgres instance on port 64271 in particular version.
@@ -44,4 +50,11 @@ shops_amount    integer := 10000;
 Username: postgres
 Password: pg
 JDBC URL: jdbc:postgresql://localhost:64271/postgres
+
+
+## Result set correctness
+If your not sure a fast and slow query are doing the same thing: 
+ - Simply compare the results for queries with a small result set
+ - Simply use count for large result sets
+ - You should have business logic tests in your application. If there are none: make the world, step by step, a tiny bit better and write them!
 
