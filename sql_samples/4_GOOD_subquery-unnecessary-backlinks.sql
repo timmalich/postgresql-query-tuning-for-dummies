@@ -11,4 +11,5 @@ where exists(
   -- THIS LINE HAS BEEN MOVED TO THE OUTER WHERE CLAUSE
   and outerSales.selling_price > 10 and outerSales.selling_price < 50
   ----------------------------------------------------------------------
-order by outerSales.id;
+order by outerSales.id
+limit 500;

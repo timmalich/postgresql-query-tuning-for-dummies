@@ -26,7 +26,7 @@ The database is available after you see this line on stdout:
 Note: the additional env parameter PGPASSWORD=pg only allows to execute `psql -U postgres` in the running container without being prompted for the password.
 Note: these arguments allow dropping the OS cache within the container. We need this only for these examples to get more consistent results.
 We will drop the caches with:
-docker exec -u 0 tuningfordummies bash -c 'echo 1 > /proc/sys/vm/drop_caches;'
+`docker exec -u 0 tuningfordummies bash -c 'echo 1 > /proc/sys/vm/drop_caches;'`
 
 ### Version 14.2.0 (the newest available in feb 2022):
 ```bash
@@ -53,6 +53,11 @@ shops_amount    integer := 10000;
 Username: postgres
 Password: pg
 JDBC URL: jdbc:postgresql://localhost:64271/postgres
+
+## Execute samples and put them into a table:
+```bash
+./run_sql_samples.sh
+```
 
 
 ## Result set correctness

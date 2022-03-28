@@ -16,4 +16,6 @@ where outerUsers.uid_upper = '53757_5UID'
           -- and outerUsers.id = innerUsers.id
           --------------------------------------
     )
-order by outerSales.id;
+order by outerSales.id
+limit 500
+;

@@ -15,7 +15,9 @@ where outerUsers.uid_upper = '53757_5UID'
           -- a backlink with sales table would work as well (or can sometimes even be better), but it's unnecessary here
           and outerSales.id = innerSales.id
     )
-order by outerSales.id;
+order by outerSales.id
+limit 500
+;
 
 
 -- Of course this is even faster and simpler but kills the comparison showcase of the backlink

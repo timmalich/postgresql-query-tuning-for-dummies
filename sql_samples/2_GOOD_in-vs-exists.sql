@@ -17,6 +17,7 @@ where exists(
           and outerUsers.id = outerSales.users_id
     )
   and outerUsers.city = '10_city'
+  limit 500
 ;
 
 -- Of course this is even faster and simpler but kills the comparison showcase of in versus exists

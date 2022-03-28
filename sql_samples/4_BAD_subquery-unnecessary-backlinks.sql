@@ -13,4 +13,5 @@ where exists(
                 and outerSales.selling_price > 10 and outerSales.selling_price < 50
                 --------------------------------------------
           )
-order by outerSales.id;
+order by outerSales.id
+limit 500;

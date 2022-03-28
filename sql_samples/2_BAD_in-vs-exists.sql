@@ -20,4 +20,5 @@ where users_id in (
       and outerUsers.id = outerSales.users_id
 )
   and outerUsers.city = '10_city'
+  limit 500
 ;
