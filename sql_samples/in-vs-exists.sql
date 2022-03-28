@@ -1,3 +1,7 @@
+-- NOTE: The `evil in` in this example only applies for: where foo in (select ...).
+-- `in` with a dedicated list (where foo in (1,2,3,4...)) is actually a pretty nice guy
+
+
 -- BAD: With IN 47s
 select outerUsers.uid,
        outerUsers.givenname,

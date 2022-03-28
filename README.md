@@ -24,22 +24,25 @@ IMPORTANT: depending on your hardware this might run a couple of minutes.
 The database is available after you see this line on stdout:
 `... database system is ready to accept connections`
 Note: the additional env parameter PGPASSWORD=pg only allows to execute `psql -U postgres` in the running container without being prompted for the password.
+Note: these arguments allow dropping the OS cache within the container. We need this only for these examples to get more consistent results.
+We will drop the caches with:
+docker exec -u 0 tuningfordummies bash -c 'echo 1 > /proc/sys/vm/drop_caches;'
 
 ### Version 14.2.0 (the newest available in feb 2022):
 ```bash
-docker rm -f tuningfordummies; docker run --name tuningfordummies -p 64271:5432 -v $(pwd)/scripts:/docker-entrypoint-initdb.d/ -e POSTGRESQL_PASSWORD=pg -e PGPASSWORD=pg bitnami/postgresql:14.2.0
+docker rm -f tuningfordummies; docker run --name tuningfordummies --privileged -v /proc:/writable_docker_proc -p 64271:5432 -v $(pwd)/scripts:/docker-entrypoint-initdb.d/ -e POSTGRESQL_PASSWORD=pg -e PGPASSWORD=pg bitnami/postgresql:14.2.0
 
 ```
 
 ### Version 11.15.0
 ```bash
-docker rm -f tuningfordummies; docker run --name tuningfordummies -p 64271:5432 -v $(pwd)/scripts:/docker-entrypoint-initdb.d/ -e POSTGRESQL_PASSWORD=pg -e PGPASSWORD=pg bitnami/postgresql:11.15.0
+docker rm -f tuningfordummies; docker run --name tuningfordummies --privileged -v /proc:/writable_docker_proc -p 64271:5432 -v $(pwd)/scripts:/docker-entrypoint-initdb.d/ -e POSTGRESQL_PASSWORD=pg -e PGPASSWORD=pg bitnami/postgresql:11.15.0
 ```
 
 ## Configure amount of test data:
 You can change the amount of test data in this [script](scripts/gen_data.sql.lqs).
 Simply configure the amount variables in the declare section:
-```sql
+```
 sales_amount    integer := 2000000;
 users_amount    integer := 1000000;
 products_amount integer := 100000;
@@ -57,7 +60,3 @@ If your not sure a fast and slow query are doing the same thing:
  - Simply compare the results for queries with a small result set
  - Simply use count for large result sets
  - You should have business logic tests in your application. If there are none: make the world, step by step, a tiny bit better and write them!
-
-TODO:
-Guids for general PerfOpt
-Avoid unnecessary sub joins

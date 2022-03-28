@@ -19,7 +19,7 @@ where outerUsers.uid_upper = '53757_5UID'
 order by outerSales.id
 ;
 
--- GOOD 0.7s
+-- GOOD 0.9s
 select *
 from sales outerSales
          join products outerProducts on outerSales.products_id = outerProducts.id
@@ -33,6 +33,8 @@ where outerUsers.uid_upper = '53757_5UID'
           --- THIS IS THE IMPORTANT LINE!
           and outerUsers.id = innerUsers.id
           ------------------------------------
+          -- a backlink with sales table would work as well (or can sometimes even be better), but it's unnecessary here
+          and outerSales.id = innerSales.id
     )
 order by outerSales.id;
 
