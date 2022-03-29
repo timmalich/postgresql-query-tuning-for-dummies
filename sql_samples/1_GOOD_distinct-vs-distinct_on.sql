@@ -1,3 +1,7 @@
--- GOOD 80ms
-select distinct on (sales.id) sales.id, sales.id, sales.selling_price, sales.payed, sales.last_payment
-from sales limit 500;
+-- be careful! distinct on can be way more effective on some queries.
+-- an example would be: you have a not index reference column and you are certain that this colum will already contain your distinct result.
+with reduceOutput as (
+    select sales.* from sales
+)
+select count(*) from reduceOutput;
+
