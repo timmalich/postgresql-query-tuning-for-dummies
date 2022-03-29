@@ -1,3 +1,7 @@
+
+
+
+
 -- GOOD 0.5s:
 select *
 from sales outerSales

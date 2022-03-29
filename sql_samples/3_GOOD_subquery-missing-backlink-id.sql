@@ -1,3 +1,7 @@
+
+
+
+
 -- GOOD 0.9s
 select *
 from sales outerSales
@@ -8,8 +12,8 @@ where outerUsers.uid_upper = '53757_5UID'
         select true
         from sales innerSales
                  join users innerUsers on innerSales.users_id = innerUsers.id
-        where outerSales.payed = innerSales.payed
-          --- THIS IS THE IMPORTANT LINE!
+        where outerSales.payed = innerSales.payed -- outerSales is connected with innerSales, but not over the id
+          --- THIS IS THE IMPORTANT LINE! Add a backlink to the indexed id column
           and outerUsers.id = innerUsers.id
           ------------------------------------
           -- a backlink with sales table would work as well (or can sometimes even be better), but it's unnecessary here

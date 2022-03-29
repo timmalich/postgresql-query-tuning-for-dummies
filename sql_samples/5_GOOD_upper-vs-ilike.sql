@@ -1,5 +1,16 @@
+--* this one is very surprising and I couldn't beliefe it until
+--*     I tested it a couple of times on real queries: upper is faster than ilike?!
+--*
+--* WARNING THIS IS NOT TRUE IF THE COLUMN HAS A gin_trgm_ops INDEX,
+--* IN FACT THE OPPOSITE IS THE CASE. FURTHERMORE IT HIGHLY DEPENDS ON THE DATABASE
+--* Side note:
+--*** The gin_trgm_ops is simply amazing!
+--*** If you have text based search queries (e.g.: ... like '%A%B%'):
+--*** START USING IT!!!
+--*** It can simply be activated as superuser with `create extension pg_trgm with schema pg_catalog;`
+--*** It can be created with: `create index my_trgm_idx on myschema.mytable using gin (mycolumn gin_trgm_ops)
+
 -- GOOD 6s;
---* WARNING THIS IS NOT TRUE IF THE COLUMN HAS A gin_trgm_ops INDEX, IN FACT THE OPPOSITE IS THE CASE. FURTHERMORE IT HIGHLY DEPENDS ON THE DATABASE
 with shadow_table_only_for_ordering as (
     select 'users1' as _, count(*) from users where upper(uid) like upper('%1%ui%')
     union all

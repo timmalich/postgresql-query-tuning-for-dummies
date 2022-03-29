@@ -51,16 +51,19 @@ Es gibt verschiedene Möglichkeiten, um an die Abfragen zu kommen. Für Hibernat
 Die schnellste und stabilste Lösung für uns ist es jedoch das Logging temporär auf der Datenbank zu aktivieren.
 Auch hier gibt es unterschiedliche Möglichkeiten, die sich schnell ergooggeln lassen. 
 Wir editieren meist die Konfiguration (`log_statement = all`, `log_min_duration_statement = 0`) und führen ein `pg_ctl reload` aus.
-Siehe [./trace_on.sh](trace_on.sh) / [./trace_off.sh](trace_off.sh)
+Siehe [./trace_on.sh](./trace_on.sh) / [./trace_off.sh](./trace_off.sh)
 
 In diesem Beispielsetup werden die Logs und Statements auf der Kommandozeile geprinted.
 Mit etwas Shell+Python Magie lassen sich die, meist Prepared Statements, mit ihren Parametern jedoch deutlich angenehmer ausgeben. 
-Siehe [./trace_show.sh](trace_show.sh).
+Siehe [./trace_show.sh](./trace_show.sh).
 
-### Performance Killer finden
-Werte Datenbankexperten, jetzt müsst ihr wieder ganz tapfer sein: [./stupid_long_and_complex_query.sql](stupid_long_and_complex_query.sql)
+### Live Demo: Performance Killer finden && Performance durch alternative Abfrage verbessern
+Werte Datenbankexperten, jetzt müsst ihr wieder ganz tapfer sein, wir werden versuchen diese Query zu beschleunigen: 
+[./stupid_long_and_complex_query.sql](./stupid_long_and_complex_query.sql)
 
-### Performance durch alternative Abfrage verbessern
+Dazu werden wir sie Stück für Stück gemeinsam durchgehen, den Grund der langsamkeit finden und ihn optimieren:
+[./stupid_long_and_complex_query_solution.sql](./stupid_long_and_complex_query_solution.sql)
+
 
 ### Richtigkeit der Ergebnismenge sicherstellen
 Das die schnellere Abfrage noch dieselben fachlich geforderten Ergebnisse zurückliefern muss ist selbstverständlich.
@@ -74,6 +77,28 @@ Da dies für jedes Projekt extrem unterschiedlich ist, werden hierauf nicht näh
 Es sei an dieser Stelle nur gewarnt: Nicht jede SQL Optimierung lässt sich ohne gigantischen Aufwand in den ORM übersetzen.
 Hibernate unterstützt beispielsweise keine AND/OR operation an joins:
 `select * from foo join faa on foo.id = faa.foo_id AND foo.xxx = 'yyy'`
+
+## Weitere Beispiele
+Ähnlich dem Austausch von `in` zu `exists` haben wir im Laufe der Zeit einige weitere alternative Abfragemöglichkeiten gefunden,
+die sich mit etwas Übung einfach erkennen lassen und die Performance enorm verbessern können.
+Die Abfragen lassen sich alle gesammelt mit diesem Skript ausführen:
+```bash
+../run_sql_samples.sh
+```
+Die [Ergebnisse](../results.md) lassen sich so relativ schnell mit unterschiedlichen Konfigurationsparametern und Datenbank vergleichen:
+
+| GOOD                                                                                                  | BAD                                                                                                 |
+|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| [5_GOOD_upper-vs-ilike.sql](../sql_samples/5_GOOD_upper-vs-ilike.sql)                                 | [5_BAD_upper-vs-ilike.sql](../sql_samples/5_BAD_upper-vs-ilike.sql)                                 |
+| [1_GOOD_distinct-vs-distinct_on.sql](../sql_samples/1_GOOD_distinct-vs-distinct_on.sql)               | [1_BAD_distinct-vs-distinct_on.sql](../sql_samples/1_BAD_distinct-vs-distinct_on.sql)               |
+| [2_GOOD_in-vs-exists.sql](../sql_samples/2_GOOD_in-vs-exists.sql )                                    | [2_BAD_in-vs-exists.sql](../sql_samples/2_BAD_in-vs-exists.sql)                                     |
+| [3_GOOD_subquery-missing-backlink-id.sql](../sql_samples/3_GOOD_subquery-missing-backlink-id.sql)     | [3_BAD_subquery-missing-backlink-id.sql](../sql_samples/3_BAD_subquery-missing-backlink-id.sql)     |
+| [4_GOOD_subquery-unnecessary-backlinks.sql](../sql_samples/4_GOOD_subquery-unnecessary-backlinks.sql) | [4_BAD_subquery-unnecessary-backlinks.sql](../sql_samples/4_BAD_subquery-unnecessary-backlinks.sql) |
+
+Sollte noch Zeit übrig sein und es so weit keine Fragen geben, gibt es noch 2 weitere Beispiele, 
+die ich jedoch mit dieser Sample DB einfach nicht reproduzieren konnte:
+- [subquery-kill-unnecessary-joins.sql](../sql_samples_not_reproducible/subquery-kill-unnecessary-joins.sql)
+- [evil-or.sql](../sql_samples_not_reproducible/evil-or.sql)
 
 ## Akronyme
 | Akronym |                                   |

@@ -1,5 +1,7 @@
--- in comparison to 3_GOOD_subquery-missing-backlink-id.sql this example shows, that you should only filter for referenced columns.
+-- in comparison to 3_GOOD_subquery-missing-backlink-id.sql this example shows,
+-- that you should only filter for referenced columns.
 -- In general: you should not filter for properties of the outer query in the exists clause
+
 -- BAD 45s:
 select *
 from sales outerSales

@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 -- BAD 8s:
 with shadow_table_only_for_ordering as (
     select 'users1' as _, count(*) from users where uid ilike upper('%1%ui%')

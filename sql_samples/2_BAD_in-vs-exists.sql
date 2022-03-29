@@ -10,14 +10,15 @@ select outerUsers.uid,
        outerSales.payed
 from sales outerSales
          join users outerUsers on outerSales.users_id = outerUsers.id
-where users_id in (
+where users_id in ( -- instead of 'column in' use exists and ...
     select innerUsers.id
     from users innerUsers
              join sales innerSales on innerUsers.id = innerSales.users_id
              join products innerProducts on innerSales.products_id = innerProducts.id
-    where innerProducts.cost > 10
+    where (innerProducts.cost > 10
       and innerSales.payed < innerSales.selling_price
-      and outerUsers.id = outerSales.users_id
+      and outerUsers.id = outerSales.users_id)
+      -- add a backlink to the original column: and outerSales.users_id = innerSales.users_id
 )
   and outerUsers.city = '10_city'
   limit 500

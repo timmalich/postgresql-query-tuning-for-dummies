@@ -34,9 +34,9 @@ where exists(
                        join shops innerShops on innerSales.shops_id = innerShops.id
               where innerProducts.cost > 1000
                  and (
-                     ---------------- THIS IS THE EVIL OR -----------------------------
+                     ------- THIS COULD BE AN EVIL OR ... but for some reason it's not --------------
                      outerUsers.givenname like '%12%' or outerUsers.surname like '%12%'
-                     ------------------------------------------------------------------
+                     --------------------------------------------------------------------------------
                      )
           )
 ;
