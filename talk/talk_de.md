@@ -17,7 +17,7 @@ Daher werden in diesem Talk diese Punkte nicht besprochen:
 Am 14.01.2021 sind wir mithilfe von *** und *** von DB2 auf Postgres migriert.
 Wir haben seither fast ausschließlich positive Erfahrungen mit der Datenbank gemacht.
 Nur um ein Gefühl für die Datenbank zu bekommen, so sieht unser Schema aus:
-![Schema](./schema.png)
+![real-schema](./real-schema.png)
 
 Die Berechtigungen der Nutzer unseres Produkts werden mit dynamisch generierten und recht komplexen _where clauses_ beschränkt.
 Hierzu setzen wir massiv die Criteria API von Hibernate ein.

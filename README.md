@@ -27,6 +27,10 @@ The db will include 4 tables in schema 'public':
 | products   | 100.000   |
 | shops      | 10.000    |
 
+The schema looks like this: 
+
+![schema](./schema.png)
+
 IMPORTANT: depending on your hardware this might run a couple of minutes.
 The database is available after you see this line on stdout:
 `... database system is ready to accept connections`
