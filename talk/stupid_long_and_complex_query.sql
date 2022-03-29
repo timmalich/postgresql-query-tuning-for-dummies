@@ -1,3 +1,10 @@
+-- pretty long and strange looking query.
+-- as a brain teaser: do get the business requirement behind the query?
+-- ...
+-- ...
+-- ...
+-- no??
+-- ... good, I'm neither :P
 select sales.id,
        users_id,
        products_id,
@@ -82,6 +89,24 @@ where sales.selling_date < now()
 )
   and u.city = '68157_city'
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -176,3 +201,25 @@ where sales.selling_date < now()                       -- simple parameter restr
 ) -- yeah that's seems to be pretty bad, let's try to rewrite it as exists
   and u.city = '68157_city'
 ;
+
+
+
+
+
+
+
+
+
+/** copy and past backup of the critical query part in the "solution". just in case the brain get's a segfault during presentation.
+ -- still slow or even slower, let's keep it and go ahead
+  and exists ( -- if that's not the part that is producing error I am going to regret my life choices
+    select innerUsers.id
+    from users innerUsers
+             join sales innerSales on innerUsers.id = innerSales.users_id
+             join products innerProducts on innerSales.products_id = innerProducts.id
+    where (innerProducts.cost > 10
+        and innerSales.payed < innerSales.selling_price
+        and u.id = sales.users_id
+              ) and sales.users_id = innerUsers.id
+) -- yeah that's seems to be pretty bad, let's try to rewrite it as exists
+ */
