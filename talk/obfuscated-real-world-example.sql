@@ -172,7 +172,7 @@ where assignedconinfo1_.id in ($1)
                                         and rcen_r2u_.users_id = this_.users_id
                                         and rcen_shopsy1_.worldwideavailable = $14) or
 
-/* query would have been evan longer, but statement was truncated ..................................... * * * * * * * *
+/* query would have been even longer, but statement was truncated ..................................... * * * * * * * *
              (exists(/* criteria query */ select
    .....................................................................................................
            */
