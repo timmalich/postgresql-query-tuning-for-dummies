@@ -70,10 +70,11 @@ Username: postgres
 Password: pg
 JDBC URL: jdbc:postgresql://localhost:64271/postgres
 
-## Execute samples and put them into a table:
+## Execute samples and put them into a .md file:
 ```bash
 ./run_sql_samples.sh
 ```
+[results.md](results.md)
 
 
 ## Result set correctness
