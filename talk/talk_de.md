@@ -75,7 +75,7 @@ Für uns reichte es daher meist aus:
 ### Abfrageanpassungen in Code / HQL / das ORM Framework übersetzen
 Da dies für jedes Projekt extrem unterschiedlich ist, werden hierauf nicht näher eingehen. 
 Es sei an dieser Stelle nur gewarnt: Nicht jede SQL Optimierung lässt sich ohne gigantischen Aufwand in den ORM übersetzen.
-Hibernate unterstützt beispielsweise keine AND/OR operation an joins:
+Hibernate unterstützt beispielsweise keine AND/OR Operation an Joins:
 `select * from foo join faa on foo.id = faa.foo_id AND foo.xxx = 'yyy'`
 
 ## Weitere Beispiele
