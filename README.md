@@ -1,6 +1,9 @@
 # Postgresql Query Tuning for Dummies
 Repository to create a Postgres database with dummy data and query tuning samples
 
+The repository was created to aid a tech talk. German version of the talk is at [./talk/talk_de.md](./talk/talk_de.md).
+An english version will be added as soon as it's required.
+
 The point of the query examples is to show generic examples of simple SQL rewriting to optimize performance.
 The sample queries are trying to highlight special changes to improve the performance without modifying the result set.
 Most of the queries can be written even faster or easier, but in real world situations this is not always possible.
