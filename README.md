@@ -1,8 +1,8 @@
 # Postgresql Query Tuning for Dummies
-Repository to create a Postgres database with dummy data and query tuning samples
+Repository to create a Postgres database with dummy data and query tuning samples.
 
 The repository was created to aid a tech talk. German version of the talk is at [./talk/talk_de.md](./talk/talk_de.md).
-An english version will be added as soon as it's required.
+An English version will be added as soon as it's required.
 
 The point of the query examples is to show generic examples of simple SQL rewriting to optimize performance.
 The sample queries are trying to highlight special changes to improve the performance without modifying the result set.
@@ -20,7 +20,7 @@ docker run --name tuningfordummies --privileged -v /proc:/writable_docker_proc -
 ```
 
 ## Setup database:
-With the next statements you'll create a running postgres instance on port 64271 in particular version.
+With the next statements, you'll create a running postgres instance on port 64271 in particular version.
 The db will include 4 tables in schema 'public':
 
 | table name | rows      |
@@ -34,7 +34,7 @@ The schema looks like this:
 
 ![schema](./schema.png)
 
-IMPORTANT: depending on your hardware this might run a couple of minutes.
+IMPORTANT: depending on your hardware, this might run a couple of minutes.
 The database is available after you see this line on stdout:
 `... database system is ready to accept connections`
 
@@ -45,9 +45,9 @@ We will drop the caches with:
 `docker exec -u 0 tuningfordummies bash -c 'echo 1 > /proc/sys/vm/drop_caches;'`
 
 Note: The argument `--shm-size=256mb` extending the shared memory size to 256mb, because docker restricts the shared memory size to 64mb. 
-64mb is simply not enough for some of the queries.
+64mb is simply not enough for some queries.
 
-### Version 14.2.0 (the newest available in feb 2022):
+### Version 14.2.0 (the newest available in Feb. 2022):
 ```bash
 docker rm -f tuningfordummies; docker run --name tuningfordummies --privileged -v /proc:/writable_docker_proc --shm-size=256mb -p 64271:5432 -v $(pwd)/scripts:/docker-entrypoint-initdb.d/ -e POSTGRESQL_PASSWORD=pg -e PGPASSWORD=pg bitnami/postgresql:14.2.0
 
@@ -81,7 +81,7 @@ JDBC URL: jdbc:postgresql://localhost:64271/postgres
 
 
 ## Result set correctness
-If your not sure a fast and slow query are doing the same thing: 
+If you're not sure, a fast and slow query are doing the same thing: 
  - Simply compare the results for queries with a small result set
  - Simply use count for large result sets
  - You should have business logic tests in your application. If there are none: make the world, step by step, a tiny bit better and write them!
