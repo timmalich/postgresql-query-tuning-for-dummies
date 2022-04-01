@@ -39,6 +39,9 @@ Das Query-Explain ist großartig und liefert viele nützliche Informationen, abe
 Spoiler: Wir konnten mit unserem Vorgehen und kleinen Anpassungen, bislang jede Abfrage auf eine hinreichend annehmbare Ausführungszeit optimieren. 
 Teilweise von > 30 Minuten auf < 1 Sekunde.
 
+## Dieses Repo
+Setup und Schema dieses Repos: [README.de](../README.md)
+
 ## Vorgehen im Detail
 1) Die Plain SQL-Query holen
 2) Performance Killer finden
